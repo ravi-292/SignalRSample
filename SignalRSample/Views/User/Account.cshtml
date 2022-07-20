@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "User Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome User - @ViewData["UserId"]</h1>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-10 col-lg-8 mx-auto my-5 mx-2 border" style="min-height:200px;background-color:#f5f5f5" id="notification-div">
+    </div>
+</div>
+
+<script>
+    function ready() {
+    }
+    //random number between 1 and 100 for demo
+    var userId = Math.floor((Math.random() * 100) + 1);
+    document.addEventListener("DOMContentLoaded", ready);
+</script>
+<script src="~/lib/microsoft-signalr/signalr.min.js"></script>
+<script src="~/js/user.js" asp-append-version="true"></script>

@@ -1,0 +1,106 @@
+﻿@using SignalRSample.Models
+@model PromotionViewModel
+@{
+    ViewData["Title"] = "Administrator Portal";
+    var recipientList = Enumerable.Range(1, 10).Select(e => new SelectListItem(text: $"User - {e}", value: $"{e}")).ToList();
+}
+
+<div class="row">
+    <div class="col-12 col-md-8 mx-auto col-lg-4 border p-4">
+        @{
+            if (ViewData["FormSubmitSuccess"] != null && bool.TryParse(ViewData["FormSubmitSuccess"].ToString(), out bool formSubmitSuccess))
+            {
+                if (formSubmitSuccess)
+                {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Congratulations!</strong> Notifications were successfully sent to selected users.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                }
+                else
+                {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Oops!</strong> Something went wrong while trying to send notifications.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                    }
+                }
+            }
+        @using (Html.BeginForm("Index", "Administrator", FormMethod.Post, new { id = "Article" }))
+        {
+            <div class="form-group">
+                <label for="title">Title</label>
+                @Html.TextBoxFor(model => model.Title, new
+               {
+                   @maxlength = "55",
+                   @minlength = "2",
+                   @required = true,
+                   @id = "title",
+                   @class = "form-control",
+                   @placeholder = "Enter Title for promotion"
+               })
+                <small id="title-help" class="form-text text-muted">This will be shown as title for your notification.</small>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                @Html.TextAreaFor(model => model.Description, new
+           {
+
+               @maxlength = "500",
+               @minlength = "5",
+               @required = true,
+               @id = "description",
+               @class = "form-control",
+               @placeholder = "Content for promotional notification.",
+               @rows = 4
+           })
+            </div>
+
+            @*<div class="form-group">
+                <label for="exampleFormControlSelect2">Recipients</label>
+                @Html.DropDownListFor(model => model.Recipients, recipientList, new
+           {
+               @multiple = true,
+               @required = true,
+               @id = "recipients",
+               @class = "form-control",
+               @placeholder = "Select one or more recipients",
+               @rows = 4
+           })
+            </div>*@
+            <button type="submit" class="btn btn-primary">Submit</button>
+        }
+    </div>
+    <div class="col-12 col-md-12 col-lg-8 bg-light">
+       
+    </div>
+</div>
+
+@*<h1>Index</h1>
+    @using (Html.BeginForm("Index", "Admin", FormMethod.Post, new { id = "Article" }))
+    {
+        <div class="row">
+            <div class="col-6">
+                Title
+            </div>
+            <div class="col-6">
+                <input type="text" id="title" name="title" />
+                @Html.TextBoxFor(model => Model.Title, new { @maxlength = "55", @minlength = "2", @required = true })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                Article Content
+            </div>
+            <div class="col-6">
+                @Html.TextBoxFor(model => Model.Description, new { @maxlength = "100" })
+            </div>
+        </div>
+        <div>
+            <button type="submit" id="btn-send-notification" value="Send Notification" />
+        </div>
+    }*@
